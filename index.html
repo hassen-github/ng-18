@@ -18,8 +18,13 @@
 	<script src="./htmlpreview.js"></script>
 -->
 <script>
-	document.body.innerHTML="<h1>test :D</h1>";
-	console.log("search param = ", location.search);
+	if(window.self !== window.top){
+		document.body.innerHTML=`<h1>Your url param is <strong>${location.search.substr(1)}</strong></h1>`;
+		console.log("search param = ", location.search);
+	}
+	else{
+		document.innerHTML = "<h1>Running this web page directly is forbidden, good day.</h1>"
+	}
 </script>
 </body>
 </html>
