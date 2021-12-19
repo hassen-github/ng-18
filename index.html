@@ -4,7 +4,8 @@
 	<meta charset="utf-8">
 </head>
 <body>
-<script>
+<script type="module">
+	import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
 	if(window.self !== window.top){
 		document.body.innerHTML=`<h1>Your url param is <strong>${location.search.substr(1)}</strong></h1>`;
 		console.log("search param = ", location.search);
