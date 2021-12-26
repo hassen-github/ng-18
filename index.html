@@ -2,17 +2,76 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<style>
+		  #myiframe{
+			position: fixed;
+			left:0;
+			top:0;
+			width:100%;
+			height:100%;
+			border:none;
+			z-index: 999;
+		}
+
+		#loading{
+			position: fixed;
+			left:0;
+			top:0;
+			border:none;
+			z-index: 1000;
+			color:white;
+			background-color: #000000;
+		}
+	</style>
 </head>
 <body>
-<script type="module">
-	import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
-	if(window.self !== window.top){
-		document.body.innerHTML=`<h1>Your url param is <strong>${location.search.substr(1)}</strong></h1>`;
-		console.log("search param = ", location.search);
-	}
-	else{
-		document.body.innerHTML = "<h1>Running this web page directly is forbidden, good day.</h1>"
-	}
+
+<iframe id="myiframe"></iframe>
+
+<script id="myscript">
+
+if(window.self !== window.top){
+	var acceptedOrigin = "https://ghanhass.github.io/myfiddle";
+
+	window.addEventListener("message", function(event){
+		var iframeElement = document.querySelector("#myiframe");
+		//let myscript = document.querySelector("#myscript");
+
+		console.log("message event = ", event);
+		if(event.origin == acceptedOrigin){
+			var data = JSON.parse(event.data);
+			if(data.type == "run"){
+				var html = data.html;
+				//var myIframe = document.querySelector("iframe");
+				var newBlob = new Blob([html],{type: "text/html"});
+				var blobUrl = URL.createObjectURL(newBlob);
+				console.log("created blob url ", blobUrl);
+
+				iframeElement.src = blobUrl;
+				var myscript = document.querySelector("#myscript");
+				if(myscript){
+					myscript.remove();
+				}
+			}
+			else if(data.type == "save"){
+
+			}
+		}
+	});
+
+	console.log("inline script started");
+	
+	var iframeElement = document.querySelector("#myiframe");
+	//let myscript = document.querySelector("#myscript");
+	iframeElement.addEventListener("load", function(){
+		console.log("sub iframe load");
+		window.parent.postMessage("sub-iframe-loaded","*");
+	});    
+}
+else{
+	document.body.innerHTML = "<h1>Running this web page directly is forbidden, good day.</h1>"
+}
+
 </script>
 </body>
 </html>
