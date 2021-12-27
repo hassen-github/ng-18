@@ -37,7 +37,7 @@ if(window.self !== window.top){
 		var iframeElement = document.querySelector("#myiframe");
 		//let myscript = document.querySelector("#myscript");
 
-		console.log("message event = ", event);
+		//console.log("message event = ", event);
 		if(event.origin == acceptedOrigin){
 			var data = JSON.parse(event.data);
 			if(data.type == "run"){
@@ -45,7 +45,7 @@ if(window.self !== window.top){
 				//var myIframe = document.querySelector("iframe");
 				var newBlob = new Blob([html],{type: "text/html"});
 				var blobUrl = URL.createObjectURL(newBlob);
-				console.log("created blob url ", blobUrl);
+				//console.log("created blob url ", blobUrl);
 
 				iframeElement.src = blobUrl;
 				var myscript = document.querySelector("#myscript");
@@ -59,12 +59,12 @@ if(window.self !== window.top){
 		}
 	});
 
-	console.log("inline script started");
+	//console.log("inline script started");
 	
 	var iframeElement = document.querySelector("#myiframe");
 	//let myscript = document.querySelector("#myscript");
 	iframeElement.addEventListener("load", function(){
-		console.log("sub iframe load");
+		//console.log("sub iframe load");
 		window.parent.postMessage("sub-iframe-loaded","*");
 	});    
 }
