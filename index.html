@@ -47,7 +47,7 @@ if(window.self !== window.top){
 				var blobUrl = URL.createObjectURL(newBlob);
 				//console.log("created blob url ", blobUrl);
 
-				iframeElement.src = blobUrl;
+				iframeElement.src = blobUrl; 
 				var myscript = document.querySelector("#myscript");
 				if(myscript){
 					myscript.remove();
