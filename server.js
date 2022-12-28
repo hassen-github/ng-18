@@ -670,8 +670,6 @@ if (window.self !== window.top) {
 			styleSheetEl.textContent = cssText;
 		}
 	}
-	//var acceptedOrigin = "http://localhost:4200";
-	//var acceptedOrigin = "https://ghanhass.github.io/myfiddle";
 	var acceptedOrigin = "https://ghanhass.github.io";
 	var blobUrl;
   
@@ -705,7 +703,7 @@ if (window.self !== window.top) {
 	window.addEventListener("message", function(event) {
   
 	  //console.log("message event = ", event);
-	  if (event.origin == acceptedOrigin || true) {
+	  if (event.origin == acceptedOrigin) {
 		var data = JSON.parse(event.data);
 		if (data.type == "run") {
 		  blobUrl = "";
