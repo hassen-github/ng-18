@@ -670,6 +670,7 @@ if (window.self !== window.top) {
 			styleSheetEl.textContent = cssText;
 		}
 	}
+	//var acceptedOrigin = "http://localhost:4200";
 	var acceptedOrigin = "https://ghanhass.github.io";
 	var blobUrl;
   
@@ -709,7 +710,7 @@ if (window.self !== window.top) {
 		  blobUrl = "";
 		  var html = data.html;
 
-		  html += "<link rel='stylesheet' href='http://localhost/myfiddlepreview/mystyle.css'>";
+		  html += "<link rel='stylesheet' href='./mystyle.css'>";
 		  html += `<style>
 		  	  html{
 		  		height:100%;
@@ -722,8 +723,8 @@ if (window.self !== window.top) {
 		  	  }
 		  </style>`;
 		  
-		  html += "<script src='http://localhost/myfiddlepreview/console-panel.js'></script>";
-		  html += "<script src='http://localhost/myfiddlepreview/server.js'></script>";
+		  html += "<script src='./console-panel.js'></script>";
+		  html += "<script src='./server.js'></script>";
   
 		  var newBlob = new Blob([html], {
 			type: "text/html"
