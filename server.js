@@ -1,4 +1,5 @@
 if (window.self !== window.top) {
+	var isProdMode=true;
 	/*
 	"data": {
             "base": "vs",
@@ -670,8 +671,7 @@ if (window.self !== window.top) {
 			styleSheetEl.textContent = cssText;
 		}
 	}
-	var isProdMode=true;
-	//var acceptedOrigin = "http://localhost:4200";
+	
 	var acceptedOrigin = isProdMode?"https://ghanhass.github.io":"http://localhost:4200";
 	var blobUrl;
   
@@ -704,7 +704,7 @@ if (window.self !== window.top) {
   
 	window.addEventListener("message", function(event) {
   
-	  //console.log("message event = ", event);
+	  console.log("message event = ", event);
 	  if (event.origin == acceptedOrigin) {
 		var data = JSON.parse(event.data);
 		if (data.type == "run") {
