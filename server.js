@@ -1,5 +1,5 @@
 if (window.self !== window.top) {
-	var isProdMode=false;
+	var isProdMode=true;
 	/*
 	"data": {
             "base": "vs",
