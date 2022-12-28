@@ -670,9 +670,9 @@ if (window.self !== window.top) {
 			styleSheetEl.textContent = cssText;
 		}
 	}
-	var acceptedOrigin = "http://localhost:4200";
+	//var acceptedOrigin = "http://localhost:4200";
 	//var acceptedOrigin = "https://ghanhass.github.io/myfiddle";
-	//var acceptedOrigin = "https://ghanhass.github.io";
+	var acceptedOrigin = "https://ghanhass.github.io";
 	var blobUrl;
   
 	//var iframeElement = document.querySelector("#myiframe");
@@ -705,7 +705,7 @@ if (window.self !== window.top) {
 	window.addEventListener("message", function(event) {
   
 	  //console.log("message event = ", event);
-	  if (event.origin == acceptedOrigin) {
+	  if (event.origin == acceptedOrigin || true) {
 		var data = JSON.parse(event.data);
 		if (data.type == "run") {
 		  blobUrl = "";
