@@ -670,7 +670,9 @@ if (window.self !== window.top) {
 			styleSheetEl.textContent = cssText;
 		}
 	}
-	var acceptedOrigin = "https://ghanhass.github.io";
+	var acceptedOrigin = "http://localhost:4200";
+	//var acceptedOrigin = "https://ghanhass.github.io/myfiddle";
+	//var acceptedOrigin = "https://ghanhass.github.io";
 	var blobUrl;
   
 	//var iframeElement = document.querySelector("#myiframe");
