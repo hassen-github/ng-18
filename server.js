@@ -193,7 +193,7 @@ if (window.self !== window.top) {
 			#console-panel .dev-tools-clear-console-icon {
 				width: 13px;
 				height: 13px;
-				background-image: url("./assets/${eraseIcon}");
+				background-image: url("${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"./"}assets/${eraseIcon}");
 				float: left;
 				background-size: contain;
 				opacity: 0.5;
@@ -228,7 +228,7 @@ if (window.self !== window.top) {
 				width: 30px;
 			
 				/* Source: chrome-devtools://devtools/bundled/Images/largeIcons_2x.png (in Google Chrome browser) */
-				background-image: url("./assets/${crossIcon}");
+				background-image: url(".${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"./"}assets/${crossIcon}");
 				background-position: 9px 8px;
 				background-size: 10px 10px;
 				order: 3;
@@ -454,12 +454,12 @@ if (window.self !== window.top) {
 				background-repeat: no-repeat;
 			
 				/* chrome-devtools://devtools/bundled/Images/treeoutlineTriangles.png */
-				background-image: url("./assets/${arrowRight}");
+				background-image: url("${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"./"}assets/${arrowRight}");
 			}
 
 			#console-panel div.jsoneditor-tree button.jsoneditor-button.jsoneditor-expanded {
 				/* chrome-devtools://devtools/bundled/Images/treeoutlineTriangles.png */
-				background-image: url("./assets/${arrowDown}");
+				background-image: url("${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"./"}assets/${arrowDown}");
 			}
 
 
@@ -555,12 +555,12 @@ if (window.self !== window.top) {
 				background-repeat: no-repeat;
 			}
 			#console-panel .console-panel-expand-collapse.console-panel-expanded {
-				background-image: url("./assets/${arrowDown}");
+				background-image: url("${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"./"}assets/${arrowDown}");
 				background-position: 0px 2px;
 			}
 
 			#console-panel .console-panel-expand-collapse.console-panel-collapsed {
-				background-image: url("./assets/${arrowRight}");
+				background-image: url("${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"./"}assets/${arrowRight}");
 			}
 
 			#console-panel .only-first-line-of-code {
@@ -670,8 +670,9 @@ if (window.self !== window.top) {
 			styleSheetEl.textContent = cssText;
 		}
 	}
+	var isProdMode=true;
 	//var acceptedOrigin = "http://localhost:4200";
-	var acceptedOrigin = "https://ghanhass.github.io";
+	var acceptedOrigin = isProdMode?"https://ghanhass.github.io":"http://localhost:4200";
 	var blobUrl;
   
 	//var iframeElement = document.querySelector("#myiframe");
@@ -710,7 +711,7 @@ if (window.self !== window.top) {
 		  blobUrl = "";
 		  var html = data.html;
 
-		  html += "<link rel='stylesheet' href='./mystyle.css'>";
+		  html += `<link rel='stylesheet' href='${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"./"}mystyle.css'>`;
 		  html += `<style>
 		  	  html{
 		  		height:100%;
@@ -723,8 +724,8 @@ if (window.self !== window.top) {
 		  	  }
 		  </style>`;
 		  
-		  html += "<script src='./console-panel.js'></script>";
-		  html += "<script src='./server.js'></script>";
+		  html += `<script src='${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"./"}console-panel.js'></script>`;
+		  html += `<script src='${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"./"}server.js'></script>`;
   
 		  var newBlob = new Blob([html], {
 			type: "text/html"
