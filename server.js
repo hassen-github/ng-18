@@ -732,7 +732,7 @@ if (window.self !== window.top) {
 		}
 	}
 	
-	var acceptedOrigin = isProdMode? "https://ghanhass.github.io" : "http://localhost:4200";
+	var acceptedOrigin = isProdMode? "https://hassen-github.github.io" : "http://localhost";
   
 	//var iframeElement = document.querySelector("#myiframe");
 	//let myscript = document.querySelector("#myscript");
