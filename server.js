@@ -732,7 +732,7 @@ if (window.self !== window.top) {
 		}
 	}
 	
-	var acceptedOrigin = isProdMode? "https://ghanhass.github.io" : "http://localhost:4200";
+	var fiddleOrigin = isProdMode? "https://ghanhass.github.io" : "http://localhost:4200";
   
 	//var iframeElement = document.querySelector("#myiframe");
 	//let myscript = document.querySelector("#myscript");
@@ -748,7 +748,7 @@ if (window.self !== window.top) {
 		//console.log("window.detectedError = ", window.detectedError);
 		generateConsoleStyleSheet(window.currentTheme);
 		if(window.isConsoleOn || window.detectedError){
-			window.parent.postMessage("detected-error", acceptedOrigin);
+			window.parent.postMessage("detected-error", fiddleOrigin);
 			consolePanel.showConsolePanel();
 			consolePanelEl.style.display = "";
 		}
@@ -756,13 +756,13 @@ if (window.self !== window.top) {
 		if(window.detectedError){
 			console.error(window.detectedError.toString());
 		}
-		window.parent.postMessage("sub-iframe-loaded", acceptedOrigin);
+		window.parent.postMessage("sub-iframe-loaded", fiddleOrigin);
 	});
   
 	window.addEventListener("message", function(event) {
   
 	  //console.log("message event = ", event);
-	  if (event.origin == acceptedOrigin) {
+	  if (event.origin == fiddleOrigin) {
 		//generateConsoleStyleSheet(event.data.currentTheme);
 		var data = JSON.parse(event.data);
 		var consolePanelEl = document.querySelector("#console-panel.console-panel");
