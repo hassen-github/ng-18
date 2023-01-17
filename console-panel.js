@@ -1240,6 +1240,7 @@
                     var consoleInputHistory = [];
                     var consoleHistoryIndex = -1;
                     var consoleInput = document.createElement('input');
+                    consoleInput.setAttribute("autocomplete", "off");
                     this.consoleInput = consoleInput;
                     logger.appendChild(consoleInput);
                     consoleInput.id = 'console-input';
