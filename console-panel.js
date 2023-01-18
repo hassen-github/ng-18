@@ -1239,12 +1239,20 @@
 
                     var consoleInputHistory = [];
                     var consoleHistoryIndex = -1;
+                    var consoleInputForm = document.createElement('form');
+                    consoleInputForm.onsubmit = (ev)=>{ev.preventDefault();}
+
+                    consoleInputForm.id = 'console-input-form';
+                    this.consoleInputForm = consoleInputForm;
+
                     var consoleInput = document.createElement('input');
                     consoleInput.setAttribute("autocomplete", "off");
                     this.consoleInput = consoleInput;
-                    logger.appendChild(consoleInput);
                     consoleInput.id = 'console-input';
                     consoleInput.autocomplete = "off";
+
+                    consoleInputForm.appendChild(consoleInput)
+                    logger.appendChild(consoleInputForm);
 
                     consoleInput.addEventListener("keyup",(ev)=>{
                         let evTarget = ev.target;
