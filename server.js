@@ -186,7 +186,7 @@ if (window.self !== window.top) {
 					/* A mix and match of font-family names from Chrome DevTools (ui/inspectorStyle.css) */
 					font-family: 'Segoe UI', '.SFNSDisplay-Regular', 'Helvetica Neue', 'Lucida Grande', Roboto, Ubuntu, Tahoma, Arial, sans-serif ;
 					font-size: 13px ;
-					height:400px;
+					height:100%;
 				}
 	
 				#console-panel.console-panel .dev-tools-header {
