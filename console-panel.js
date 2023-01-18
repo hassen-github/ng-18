@@ -1240,7 +1240,6 @@
                     var consoleInputHistory = [];
                     var consoleHistoryIndex = -1;
                     var consoleInputForm = document.createElement('form');
-                    consoleInputForm.onsubmit = (ev)=>{ev.preventDefault();}
 
                     consoleInputForm.id = 'console-input-form';
                     this.consoleInputForm = consoleInputForm;
@@ -1254,19 +1253,20 @@
                     consoleInputForm.appendChild(consoleInput)
                     logger.appendChild(consoleInputForm);
 
-                    consoleInput.addEventListener("keyup",(ev)=>{
-                        let evTarget = ev.target;
-                        if(ev.code == "Enter"){//Enter ?
-                            let val = evTarget.value;
+                    consoleInputForm.addEventListener("submit", (ev)=>{
+                        ev.preventDefault();
+                        let val = consoleInput.value;
                             if(val !== ""){
-                                evTarget.value = "";
+                                consoleInput.value = "";
                                 let fct = new Function(`console.log(${val})`);
                                 consoleInputHistory.push(val);
                                 consoleHistoryIndex = consoleInputHistory.length;
                                 fct();
                             }
-                        }
-                        else{
+                    })
+
+                    consoleInput.addEventListener("keyup",(ev)=>{
+                        let evTarget = ev.target;
                             if(consoleInputHistory.length > 0){
                                 if(ev.code == "ArrowUp"){
                             
@@ -1294,7 +1294,6 @@
                                     //console.log("consoleInputHistory = ", consoleInputHistory);
                                 }
                             }
-                        }
             
                     });
                 }
