@@ -673,7 +673,7 @@ if (window.self !== window.top) {
 					width: calc(100% - 2px) ;
 					border: none ;
 					margin: 0 ;
-					padding: 1px ;
+					padding: 1px 1px 1px 10px ;
 					color: ${themeForeGround} ;
 					box-shadow: 0 0 2px 0px ${themeCursorForeground} ;
 					background-color:${themeBackground};
@@ -684,8 +684,29 @@ if (window.self !== window.top) {
 
 				#console-panel.console-panel input#console-input:focus,
 				#console-panel.console-panel input#console-input:focus-visible{
-					box-shadow: 0 0 3px 1px ${themeCursorForeground} ;
+					border-bottom: 1px solid ${themeCursorForeground};
 				}
+
+				form#console-input-form::before {
+				    content: '>';
+				    position: absolute;
+					color: ${themeForeGround} ;
+				    left: 0;
+				    top: 50%;
+				    z-index: 2;
+				    transform: translateY(-50%);
+				    line-height: 15px;
+				    display: flex;
+				    font-size: 15px;
+				    font-family: monospace;
+				    color: #202020;
+					opacity:0.5;
+				}
+
+				form#console-input-form {
+					position: relative;
+				}
+
 	
 				#console-panel.console-panel {
 					position: fixed ;
