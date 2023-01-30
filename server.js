@@ -670,7 +670,7 @@ if (window.self !== window.top) {
 	
 				#console-panel.console-panel input#console-input {
 					height: 28px ;
-					width: calc(100% - 2px) ;
+					width: calc(100% - 11px);
 					border: none ;
 					margin: 0 ;
 					padding: 1px 1px 1px 10px ;
@@ -699,7 +699,6 @@ if (window.self !== window.top) {
 				    display: flex;
 				    font-size: 15px;
 				    font-family: monospace;
-				    color: #202020;
 					opacity:0.5;
 				}
 
