@@ -1138,11 +1138,12 @@
 
         ConsolePanel.prototype.render = function () {
             var that = this;
+            var shadow = myfiddleConsoleEl.shadowRoot;
 
             var consolePanelContainer = document.createElement('div');
             consolePanelContainer.id = 'console-panel';
             consolePanelContainer.className = 'console-panel';
-            document.body.appendChild(consolePanelContainer);
+            shadow.append(consolePanelContainer);
 
             var devToolsIconContainer = document.createElement('div');
             this.devToolsIconContainer = devToolsIconContainer;

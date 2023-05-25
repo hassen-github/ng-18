@@ -1,4 +1,16 @@
 if (window.self !== window.top) {
+	class  fiddleConsole extends HTMLElement{
+		constructor (){
+			super();
+
+			this.attachShadow({mode: "open"});
+
+		}
+	}
+	customElements.define("myfiddle-console", fiddleConsole);
+	var myfiddleConsoleEl = document.createElement("myfiddle-console");
+	myfiddleConsoleEl.style.cssText = "all: initial !important";
+	document.body.appendChild(myfiddleConsoleEl);
 
 	var isProdMode = location.origin === "https://hassen-github.github.io" ? true : false;
 	/*
@@ -15,7 +27,7 @@ if (window.self !== window.top) {
               }
         },
 	*/
-	function generateConsoleStyleSheet(currentTheme) {
+	function generateConsoleStyleSheet(currentTheme, returnCss) {
 		if (currentTheme) {
 		  var themeForeGround = currentTheme.colors["editor.foreground"];
 		  var themeBackground = currentTheme.colors["editor.background"];
@@ -69,6 +81,10 @@ if (window.self !== window.top) {
 					right: 20px ;
 					bottom: 20px ;
 				}
+
+				#console-panel.console-panel .dev-tools-icon-container-bottom-right, #console-panel .dev-tools-icon-container-right-bottom{
+		  		  display:none !important;
+		  	  	}
 	
 				#console-panel.console-panel .dev-tools-icon {
 					width: 32px ;
@@ -187,18 +203,19 @@ if (window.self !== window.top) {
 					font-family: 'Segoe UI', '.SFNSDisplay-Regular', 'Helvetica Neue', 'Lucida Grande', Roboto, Ubuntu, Tahoma, Arial, sans-serif ;
 					font-size: 13px ;
 					height:100%;
+					flex-direction: column;
 				}
 	
 				#console-panel.console-panel .dev-tools-header {
-					height: 20px ;
-					line-height: 20px ;
-					background-color: ${themeBackground} ;
-					padding: 2px 0px 2px 6px ;
+					height: 20px;
+					line-height: 20px;
+					background-color: #FFFFFF;
+					padding: 2px 0px 2px 6px;
 					border-bottom: 1px solid #d0d0d0;
-					border-top: 1px solid #d0d0d0 ;
-					font-size: 12px ;
-					display:flex ;
-					align-items: center ;
+					border-top: 1px solid #d0d0d0;
+					font-size: 12px;
+					display: flex;
+					align-items: center;
 				}
 	
 				#console-panel.console-panel .dev-tools-clear-console-icon {
@@ -261,10 +278,10 @@ if (window.self !== window.top) {
 				}
 	
 				#console-panel.console-panel .dev-tools-console {
-					clear: both ;
-					overflow: auto ;
-					height: calc(100% - 31px) ;
-					width: 100% ;
+					clear: both;
+					overflow: hidden;
+					width: 100%;
+					flex-grow: 1;
 				}
 	
 				#console-panel.console-panel .dev-tools-console-body {
@@ -704,6 +721,7 @@ if (window.self !== window.top) {
 
 				form#console-input-form {
 					position: relative;
+					margin:0px;
 				}
 
 	
@@ -740,15 +758,27 @@ if (window.self !== window.top) {
 	
 				/******END Console panel******/
 				`
-		  var styleSheetEl = document.querySelector("style#console-stylesheet");
-		  if (styleSheetEl) {
-			styleSheetEl.remove();
+		  if (returnCss){
+			return cssText;
 		  }
-	
-		  styleSheetEl = document.createElement("style");
-		  styleSheetEl.id = "console-stylesheet";
-		  document.head.appendChild(styleSheetEl);
-		  styleSheetEl.textContent = cssText;
+		  else{
+			let shadowRoot = myfiddleConsoleEl.shadowRoot;
+
+			let styleEl = document.createElement("style");
+			styleEl.textContent = generateConsoleStyleSheet(window.currentTheme, true);
+			shadowRoot.appendChild(styleEl);
+
+			var styleSheetEl = shadowRoot.querySelector("style#console-stylesheet");
+		  	if (styleSheetEl) {
+				styleSheetEl.remove();
+		  	}
+		  
+		  	styleSheetEl = document.createElement("style");
+		  	styleSheetEl.id = "console-stylesheet";
+		  	styleSheetEl.textContent = cssText;
+			
+			shadowRoot.append(styleSheetEl);
+		  }
 		}
 	}
 	
@@ -759,9 +789,10 @@ if (window.self !== window.top) {
 
 	
 	window.addEventListener("load", function() {
+
 		consolePanel.enable();
 
-		var consolePanelEl = document.querySelector("#console-panel.console-panel");
+		var consolePanelEl = myfiddleConsoleEl.shadowRoot.querySelector("#console-panel.console-panel");
 		consolePanelEl.style.display = "none";
 
 		//console.log("sub iframe load");
@@ -785,7 +816,7 @@ if (window.self !== window.top) {
 	  if (event.origin == fiddleOrigin) {
 		//generateConsoleStyleSheet(event.data.currentTheme);
 		var data = JSON.parse(event.data);
-		var consolePanelEl = document.querySelector("#console-panel.console-panel");
+		var consolePanelEl = myfiddleConsoleEl.shadowRoot.querySelector("#console-panel.console-panel");
 		if (data.type == "run") {
 		  generateConsoleStyleSheet(event.data.currentTheme);
 		  var blobUrl = "";
@@ -797,10 +828,6 @@ if (window.self !== window.top) {
 		  		height:100%;
 		  		width:100%;
 		  		background-color: #FFFFFF;
-		  	  }
-  
-		  	  #console-panel .dev-tools-icon-container-bottom-right, #console-panel .dev-tools-icon-container-right-bottom{
-		  		  display:none !important;
 		  	  }
 		  </style>` + html;
 		  
@@ -829,7 +856,7 @@ if (window.self !== window.top) {
 		  consolePanel.showConsolePanel();
 		  consolePanelEl.style.display = "";
 
-		  document.querySelector("#console-panel #console-input").focus();
+		  myfiddleConsoleEl.shadowRoot.querySelector("#console-panel #console-input").focus();
 		}
 		else if (data.type == "console-hide") {
 			consolePanelEl.style.display = "none";
