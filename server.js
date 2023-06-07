@@ -209,7 +209,7 @@ if (window.self !== window.top) {
 				#console-panel.console-panel .dev-tools-header {
 					height: 20px;
 					line-height: 20px;
-					background-color: #FFFFFF;
+					background-color: ${themeBackground};
 					padding: 2px 0px 2px 6px;
 					border-bottom: 1px solid #d0d0d0;
 					border-top: 1px solid #d0d0d0;
