@@ -823,13 +823,6 @@ if (window.self !== window.top) {
 		  var html = data.html;
 
 		  //html += `<link rel='stylesheet' href='${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"http://localhost/myfiddlepreview/"}mystyle.css'>`;
-		  html = `<style>
-		  	  html{
-		  		height:100%;
-		  		width:100%;
-		  		background-color: #FFFFFF;
-		  	  }
-		  </style>` + html;
 		  
 		  html += `<script src='${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"http://localhost/myfiddlepreview/"}console-panel.js'></script>`;
 		  html += `<script src='${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"http://localhost/myfiddlepreview/"}server.js'></script>`;
