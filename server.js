@@ -737,6 +737,7 @@ if (window.self !== window.top) {
     				overflow: hidden ;
     				height: 400px ;
 					max-height:100%;
+					z-index:99999;
 				}
 	
 				#console-panel.console-panel .log-call-stack {
