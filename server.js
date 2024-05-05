@@ -1,4 +1,5 @@
 if (window.self !== window.top) {
+	/*
 	class  fiddleConsole extends HTMLElement{
 		constructor (){
 			super();
@@ -11,6 +12,7 @@ if (window.self !== window.top) {
 	var myfiddleConsoleEl = document.createElement("myfiddle-console");
 	myfiddleConsoleEl.style.cssText = "all: initial !important";
 	document.body.appendChild(myfiddleConsoleEl);
+	*/
 
 	var isProdMode = location.origin === "https://hassen-github.github.io" ? true : false;
 	/*
@@ -737,7 +739,6 @@ if (window.self !== window.top) {
     				overflow: hidden ;
     				height: 400px ;
 					max-height:100%;
-					z-index:99999;
 				}
 	
 				#console-panel.console-panel .log-call-stack {
@@ -791,6 +792,7 @@ if (window.self !== window.top) {
 	
 	window.addEventListener("load", function() {
 
+		/*
 		consolePanel.enable();
 
 		var consolePanelEl = myfiddleConsoleEl.shadowRoot.querySelector("#console-panel.console-panel");
@@ -808,6 +810,7 @@ if (window.self !== window.top) {
 		if(window.detectedError){
 			console.error(window.detectedError.toString());
 		}
+		*/
 		window.parent.postMessage("sub-iframe-loaded", fiddleOrigin);
 	});
   
@@ -817,15 +820,15 @@ if (window.self !== window.top) {
 	  if (event.origin == fiddleOrigin) {
 		//generateConsoleStyleSheet(event.data.currentTheme);
 		var data = JSON.parse(event.data);
-		var consolePanelEl = myfiddleConsoleEl.shadowRoot.querySelector("#console-panel.console-panel");
+		//var consolePanelEl = myfiddleConsoleEl.shadowRoot.querySelector("#console-panel.console-panel");
 		if (data.type == "run") {
-		  generateConsoleStyleSheet(event.data.currentTheme);
+		  //generateConsoleStyleSheet(event.data.currentTheme);
 		  var blobUrl = "";
 		  var html = data.html;
 
 		  //html += `<link rel='stylesheet' href='${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"http://localhost/myfiddlepreview/"}mystyle.css'>`;
 		  
-		  html += `<script src='${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"http://localhost/myfiddlepreview/"}console-panel.js'></script>`;
+		  //html += `<script src='${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"http://localhost/myfiddlepreview/"}console-panel.js'></script>`;
 		  html += `<script src='${isProdMode ? "https://hassen-github.github.io/myfiddlepreview/":"http://localhost/myfiddlepreview/"}server.js'></script>`;
   
 		  var newBlob = new Blob([html], {
@@ -842,12 +845,13 @@ if (window.self !== window.top) {
 		  if (myscript) {
 			myscript.remove();
 		  }
-		}else if (data.type == "change-console-theme") {
-		  generateConsoleStyleSheet(data.currentTheme);
+		}
+		/*
+		else if (data.type == "change-console-theme") {
+		  //generateConsoleStyleSheet(data.currentTheme);
 		}
 		else if (data.type == "console-show") {
-		  //generateConsoleStyleSheet(data.currentTheme);
-		  consolePanel.showConsolePanel();
+		  /*consolePanel.showConsolePanel();
 		  consolePanelEl.style.display = "";
 
 		  myfiddleConsoleEl.shadowRoot.querySelector("#console-panel #console-input").focus();
@@ -864,6 +868,7 @@ if (window.self !== window.top) {
 				consolePanelEl.style.height = "400px";
 			}
 		}
+		*/
 	  }
 	});
   
