@@ -1,9 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng-18": {
+    "aq": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -11,86 +14,89 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "ngx-build-plus:application",
+          "builder": "ngx-build-plus:browser",
           "options": {
-            "outputPath": "dist/ng-18",
+            "outputPath": "dist/aq",
             "index": "src/index.html",
-            "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "aot": true,
             "assets": [
+              "src/favicon.ico",
+              "src/assets",
               {
-                "glob": "**/*",
-                "input": "public"
+                "glob": "**/*.js",
+                "input": "node_modules/@webcomponents/webcomponentsjs",
+                "output": "webcomponents/"
               }
             ],
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "extraWebpackConfig": "webpack.config.js"
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "none",
+              "extraWebpackConfig": "webpack.prod.config.js"
             },
             "development": {
+              "buildOptimizer": false,
               "optimization": false,
+              "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "ngx-build-plus:dev-server",
+          "options": {  
+            "proxyConfig": "src/proxy.conf.json"
+          },
           "configurations": {
             "production": {
-              "buildTarget": "ng-18:build:production"
+              "browserTarget": "aq:build:production",
+              "extraWebpackConfig": "webpack.prod.config.js"
             },
             "development": {
-              "buildTarget": "ng-18:build:development"
-            }
+              "browserTarget": "aq:build:development",
+              "extraWebpackConfig": "webpack.config.js"
+            } 
           },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "ngx-build-plus:extract-i18n"
-        },
-        "test": {
-          "builder": "ngx-build-plus:karma",
+          "builder": "ngx-build-plus:extract-i18n",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
+            "browserTarget": "aq:build",
+            "extraWebpackConfig": "webpack.prod.config.js"
           }
         }
       }
     }
-  }
+  },
+  "defaultProject": "aq"
 }
