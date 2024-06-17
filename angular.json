@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "aq": {
+    "ng-18": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -16,10 +16,12 @@
         "build": {
           "builder": "ngx-build-plus:browser",
           "options": {
-            "outputPath": "dist/aq",
+            "outputPath": "dist/ng-18",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
@@ -74,15 +76,17 @@
         "serve": {
           "builder": "ngx-build-plus:dev-server",
           "options": {  
+            "publicHost": "http://localhost:4302",
+            "port": 4302,
             "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "aq:build:production",
+              "buildTarget": "ng-18:build:production",
               "extraWebpackConfig": "webpack.prod.config.js"
             },
             "development": {
-              "browserTarget": "aq:build:development",
+              "buildTarget": "ng-18:build:development",
               "extraWebpackConfig": "webpack.config.js"
             } 
           },
@@ -91,12 +95,11 @@
         "extract-i18n": {
           "builder": "ngx-build-plus:extract-i18n",
           "options": {
-            "browserTarget": "aq:build",
+            "buildTarget": "ng-18:build",
             "extraWebpackConfig": "webpack.prod.config.js"
           }
         }
       }
     }
-  },
-  "defaultProject": "aq"
+  }
 }

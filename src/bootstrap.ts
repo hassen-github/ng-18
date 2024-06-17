@@ -9,14 +9,15 @@ if(window.location.href.indexOf("/fc") > -1){// microfentend mode ?
   bootstrap(AppModule, {
     production: environment.production,
     appType: "microfrontend"
-  })
+  }).then((res)=>{console.log("res = ", res)},(rej)=>{console.log("rej = ", rej)})
 }
 else{//standalone mode ?
   if(environment.production){
     enableProdMode();
   }
-}
 
-platformBrowserDynamic()
+  platformBrowserDynamic()
   .bootstrapModule(AppModule)
   .catch((err) => console.error(err));
+
+}

@@ -1,0 +1,10 @@
+{
+    "/fcApi/": {
+        "target": "http://localhost:8081/fc/v1",
+        "secure": false,
+        "logLevel": "debug",
+        "pathRewrite": {
+            "^/aqApi": ""
+        }
+    }
+}

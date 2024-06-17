@@ -1,0 +1,11 @@
+div{
+    border: 1px solid green;
+    display: inline-block;
+    padding: 5px;
+    text-align: center;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}

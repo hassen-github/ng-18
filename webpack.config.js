@@ -1,35 +1,34 @@
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-////////////////////////
+
+const mf=require("@angular-architects/module-federation/webpack");
+
+const share = mf.share;
+
 module.exports = {
   output: {
-    publicPath: "https://hassen-github.github.io/ng-18-example/",
-    uniqueName: "fc"
+    publicPath: "http://localhost:4302/",
+    uniqueName: "fc",
+    scriptType: 'text/javascript'
   },
   optimization: {
-    // Only needed to bypass a temporary bug
-    runtimeChunk: false
+    runtimeChunk: false,
+  },
+  experiments: {
+    outputModule: true,
   },
   plugins: [
     new ModuleFederationPlugin({
-
-      // For remotes (please adjust)
-      
       name: "fc",
       library: { type: "var", name: "fc" },
       filename: "remoteEntry.js",
       exposes: {
-        './web-components': './src/bootstrap.ts',
+        "./web-components": "./src/bootstrap.ts"
       },
-      
-
       shared: share({
-        "@angular/core": { requiredVersion:'auto' }, 
-        "@angular/common": { requiredVersion:'auto' }, 
-        "@angular/router": { requiredVersion:'auto' },
-        "rxjs": { requiredVersion:'auto' }
+        "@angular/core": {requiredVersion: "auto"},
+        "@angular/router": {requiredVersion: "auto"},
+        "@angular/common": {requiredVersion: "auto"}
       })
-    }
-
-    )
-  ]
+    }),
+  ],
 };
