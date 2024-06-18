@@ -5,6 +5,7 @@ import { BdwExternalMessage } from './bdw-external-message';
   selector: 'fc-element',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class AppComponent {
 
